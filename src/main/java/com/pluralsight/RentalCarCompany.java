@@ -9,29 +9,35 @@ public class RentalCarCompany {
         //creating scanner
         Scanner rentalCar = new Scanner(System.in);
 
+        //Placing my Methods down
         pickupDate(rentalCar);
 
-        rentalCar.nextLine();
-
-        daysWithRental(rentalCar);
-
-        rentalCar.nextLine();
-
-        electronicTollTag(rentalCar);
+        //Gathering base price
+        double basePrice = 29.99;
 
 
+        //adding the option price
+        double optionPrice = 0;
 
-        wantGPS(rentalCar);
+        if (electronicTollTag(rentalCar).equals("yes")){
+            optionPrice = basePrice + 3.95;
+        }
 
+        if (wantGPS(rentalCar).equals("yes")){
+            optionPrice = basePrice + 2.95;
+        }
 
+        if (roadsideAssistance(rentalCar).equals("yes")){
+            optionPrice = basePrice + 3.95;
+        }
 
-        roadsideAssistance(rentalCar);
+        if (age(rentalCar) < 25){
+            optionPrice = basePrice + (basePrice * .30);
+        }
 
+        System.out.println( optionPrice);
 
-        age(rentalCar);
-
-
-
+        //finding the total
 
     }
     //creating methods that ask the questions
@@ -92,11 +98,11 @@ public class RentalCarCompany {
         return roadSide;
     }
 
-    public static String age(Scanner rentalCar){
+    public static int age(Scanner rentalCar){
 
         System.out.println("What is your age: ");
 
-        String yourAge = rentalCar.nextLine();
+        int yourAge = rentalCar.nextInt();
 
         System.out.println("Your age: " + yourAge);
 
