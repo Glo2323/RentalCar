@@ -75,6 +75,7 @@ public class RentalCarCompany {
         return pickup;
     }
 
+    //asking how many days with the rental
     public static int daysWithRental(Scanner rentalCar ){
 
         System.out.println("How many days with rental: ");
