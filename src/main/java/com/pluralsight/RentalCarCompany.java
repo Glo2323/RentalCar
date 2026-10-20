@@ -11,6 +11,7 @@ public class RentalCarCompany {
 
         //Placing my Methods down
         pickupDate(rentalCar);
+        rentalCar.nextLine();
 
         //Gathering base price
         double basePrice = 29.99;
@@ -18,26 +19,48 @@ public class RentalCarCompany {
 
         //adding the option price
         double optionPrice = 0;
+        double total = 0;
+        double tollTag = 0;
+        double GPS = 0;
+        double roadside = 0;
 
-        if (electronicTollTag(rentalCar).equals("yes")){
-            optionPrice = basePrice + 3.95;
+        //asking if they want toll tag
+        if (electronicTollTag(rentalCar).equalsIgnoreCase("yes")){
+            tollTag = 3.95;
         }
 
-        if (wantGPS(rentalCar).equals("yes")){
-            optionPrice = basePrice + 2.95;
+        //asking if they want gps
+        if (wantGPS(rentalCar).equalsIgnoreCase("yes")){
+            GPS = 2.95;
         }
 
-        if (roadsideAssistance(rentalCar).equals("yes")){
-            optionPrice = basePrice + 3.95;
+        //asking if they want roadside assistance
+        if (roadsideAssistance(rentalCar).equalsIgnoreCase("yes")){
+            roadside =  3.95;
         }
 
+        //finding the option price
+        optionPrice = basePrice + tollTag + GPS + roadside;
+
+
+        //finding out the daily cost
+        total = optionPrice * daysWithRental(rentalCar);
+
+
+        //asking for age
+        double yourAgePrice = 0;
         if (age(rentalCar) < 25){
-            optionPrice = basePrice + (basePrice * .30);
+            yourAgePrice = basePrice * .30;
         }
 
-        System.out.println( optionPrice);
 
         //finding the total
+        double fullPrice = 0;
+
+        fullPrice = total + yourAgePrice;
+
+        // Giving out the info
+        System.out.printf("Your full price for the rental will be $%.2f", fullPrice);
 
     }
     //creating methods that ask the questions
@@ -64,40 +87,44 @@ public class RentalCarCompany {
 
     }
 
+    //asking if they want toll tag
     public static String electronicTollTag(Scanner rentalCar){
 
         System.out.println("Would you like a electronic toll tag: Yes/No ");
 
         String tollTag = rentalCar.nextLine();
 
-        System.out.println("You picked: " + tollTag);
+        System.out.println("You picked: " + tollTag + " additional charger of $3.95 a day");
 
         return  tollTag;
 
     }
 
+    //asking if they want gps
     public static String wantGPS(Scanner rentalCar){
 
         System.out.println("Would you like GPS: Yes/No ");
 
         String GPS = rentalCar.nextLine();
 
-        System.out.println("You picked: " + GPS);
+        System.out.println("You picked: " + GPS + " additional charger of $2.95 a day");
 
         return GPS;
     }
 
+    //asking if they want roadside assistance
     public static String roadsideAssistance(Scanner rentalCar){
 
         System.out.println("Would you like roadside assistance: Yes/No ");
 
         String roadSide = rentalCar.nextLine();
 
-        System.out.println("You picked: " + roadSide);
+        System.out.println("You picked: " + roadSide + " additional charger of $3.95 a day");
 
         return roadSide;
     }
 
+    //asking for age
     public static int age(Scanner rentalCar){
 
         System.out.println("What is your age: ");
